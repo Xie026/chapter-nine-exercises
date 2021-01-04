@@ -1,0 +1,287 @@
+9.3（使用日期类Data）
+import java.util.Date;
+public class Pratice {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Date date=new Date();
+		int cnt=1;
+		long time=10000;
+		while(cnt<=8) {
+			date.setTime(time);
+			System.out.println(date.toString());
+            //Date类的toString()方法返回日期和时间的字符串
+			cnt++;
+			time=time*10;
+		}
+	}
+
+}
+
+
+
+
+
+9.4（使用随机类Random）
+import java.util.Random;
+public class Pratice {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Random random=new Random(1000);
+		for(int i=0;i<50;i++) {
+			System.out.print(random.nextInt(100)+" ");
+			//Random类的nextInt(n)返回一个0到n(不包含n)之间的随机int类型的值
+			if((i+1)%10==0) {
+				System.out.print('\n');
+			}
+		}
+	}
+
+}
+
+
+
+
+
+9.5（使用公历类GregorianCalendar）
+import java.util.GregorianCalendar;
+public class Pratice {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		GregorianCalendar gregorianCalendar=new GregorianCalendar();
+		System.out.println("The year is: "+gregorianCalendar.get(GregorianCalendar.YEAR));
+		System.out.println("The month is: "+gregorianCalendar.get(GregorianCalendar.MONTH));
+		System.out.println("The day_of _month is: "+gregorianCalendar.get(GregorianCalendar.DAY_OF_MONTH));
+		
+		gregorianCalendar.setTimeInMillis(1234567898765L);
+		System.out.println("The year is: "+gregorianCalendar.get(GregorianCalendar.YEAR));
+		System.out.println("The month is: "+gregorianCalendar.get(GregorianCalendar.MONTH));
+		System.out.println("The day_of _month is: "+gregorianCalendar.get(GregorianCalendar.DAY_OF_MONTH));
+		
+	}
+
+}
+
+
+
+
+
+9.6（秒表）
+StopWatch类
+
+public class StopWatch {
+	private long startTime;
+	private long endTime;
+	
+	public StopWatch() {
+		startTime=System.currentTimeMillis();
+	}
+	
+	public void start() {
+		startTime=System.currentTimeMillis();
+	}
+	
+	public void stop() {
+		endTime=System.currentTimeMillis();
+	}
+	
+	
+	public long getElapsedTime() {
+		return endTime-startTime;
+	}
+}
+
+
+import java.util.Scanner;
+public class Pratice{
+	
+	public static void main(String[] args){
+		// TODO Auto-generated method stub
+		Scanner input=new Scanner(System.in);
+		int[] array=new int[100000];
+		StopWatch time=new StopWatch();
+		for(int i=1;i<=10000;i++) {
+			array[i-1]=(int)((System.currentTimeMillis()/i)%1000);
+		}
+		
+		time.start();
+		for(int i=0;i<9999;i++) {
+			for(int j=i+1;j<100000;j++) {
+				if(array[i]>array[j]) {
+					int temp=array[i];
+					array[i]=array[j];
+					array[j]=temp;
+				}
+			}
+		}
+		time.stop();
+		System.out.println(time.getElapsedTime());
+	}
+}
+ 
+
+
+
+
+9.10（代数：二次方程）
+QuadraticEquation类
+
+public class QuadraticEquation {
+	private double a;
+	private double b;
+	private double c;
+	
+	public QuadraticEquation(double newa,double newb,double newc) {
+		a=newa;
+		b=newb;
+		c=newc;
+	}
+	
+	public double geta() {
+		return a;
+	}
+	
+	public double getb() {
+		return b;
+	}
+	public double getc() {
+		return c;
+	}
+	
+	public double getDiscriminant() {
+		return (b*b-4*a*c);
+	}
+	
+	public double getRoot1() {
+		if(getDiscriminant()>=0) {
+			return (-b+Math.pow(getDiscriminant(),0.5))/(2*a);
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	public double getRoot2() {
+		if(getDiscriminant()>=0) {
+			return (-b-Math.pow(getDiscriminant(),0.5))/(2*a);
+		}
+		else {
+			return 0;
+		}
+	}
+}
+
+
+import java.util.Scanner;
+public class Pratice{
+	
+	public static void main(String[] args){
+		// TODO Auto-generated method stub
+		Scanner input=new Scanner(System.in);
+		System.out.print("Enter the a: ");
+		double a=input.nextDouble();
+		System.out.print("Enter the b: ");
+		double b=input.nextDouble();
+		System.out.print("Enter the c: ");
+		double c=input.nextDouble();
+		
+		QuadraticEquation equation=new QuadraticEquation(a,b,c);
+		if(equation.getDiscriminant()<0) {
+			System.out.println("The equation has no roots");
+		}
+		else if(equation.getDiscriminant()==0) {
+			System.out.println("The root is: "+equation.getRoot1());
+		}
+		else {
+			System.out.println("The root1 is: "+equation.getRoot1());
+			System.out.println("The root2 is: "+equation.getRoot2());
+		}
+	}
+}
+ 
+
+
+
+9.11（代数：2*2的线性方程）
+LinearEquation类
+
+
+public class LinearEquation {
+	private double a;
+	private double b;
+	private double c;
+	private double d;
+	private double e;
+	private double f;
+	
+	public LinearEquation(double newa,double newb,double newc,double newd,double newe,double newf) {
+		a=newa;
+		b=newb;
+		c=newc;
+		d=newd;
+		e=newe;
+		f=newf;
+	}
+	
+	public double geta() {
+		return a;
+	}
+	public double getb() {
+		return b;
+	}
+	public double getc() {
+		return c;
+	}
+	public double getd() {
+		return d;
+	}
+	public double gete() {
+		return e;
+	}
+	public double getf() {
+		return f;
+	}
+	
+	public boolean isSolvable() {
+		return (a*d-b*c)!=0;
+	}
+	
+	public double getX() {
+		return (e*d-b*f)/(a*d-b*c);
+    }
+	
+	public double getY() {
+	return (a*f-e*c)/(a*d-b*c);
+	}
+}
+
+
+import java.util.Scanner;
+public class Pratice{
+	
+	public static void main(String[] args){
+		// TODO Auto-generated method stub
+		Scanner input=new Scanner(System.in);
+		System.out.print("Enter a,b,c,d,e,f: ");
+		double a=input.nextDouble();
+		double b=input.nextDouble();
+		double c=input.nextDouble();
+		double d=input.nextDouble();
+		double e=input.nextDouble();
+		double f=input.nextDouble();
+		LinearEquation equation=new LinearEquation(a,b,c,d,e,f);
+		if(equation.isSolvable()) {
+			System.out.println("The X is: "+equation.getX());
+			System.out.println("The Y is: "+equation.getY());
+		}
+		else {
+			System.out.println("The equation has no solution");
+		}
+	}
+}
+ 
+
+
+
